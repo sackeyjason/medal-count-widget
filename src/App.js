@@ -8,7 +8,7 @@ class App extends Component {
         <div style={{maxWidth: "600px"}}>
           <MedalCount
             element_id="medals"
-            sort="total"/>
+            sort="gold"/>
         </div>
       </div>
     );

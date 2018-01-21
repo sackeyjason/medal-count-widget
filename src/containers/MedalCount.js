@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as mj from '../utils/medals.json';
 
-let metalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
+let medalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
 class MetalCount extends Component {
   constructor(props) {
@@ -14,15 +14,34 @@ class MetalCount extends Component {
   }
 
   handleClick(event) {
-
+    
   }
 
   getResultTable() {
+    let sorter = (a, b) => {
+      let sortOrder = this.state.sort;
+      let tieBreaker = 'gold';
+      let comparison;
+      if (sortOrder === 'gold') {
+        tieBreaker = 'silver';
+      }
+      if (sortOrder === 'total') {
+        a.total = a.gold + a.silver + a.bronze;
+        b.total = b.gold + b.silver + b.bronze;
+      }
+      comparison = b[sortOrder] - a[sortOrder];
+      if (comparison !== 0) {
+        return comparison;
+      } else {
+        return (b[tieBreaker] - a[tieBreaker]);
+      }
+    };
+
     return (
-      <table>
+      <table style={{width: "100%"}}>
         <thead>
           <tr>
-            <td colspan="3"></td>
+            <td colSpan="3"></td>
             <td>gold</td>
             <td></td>
             <td></td>
@@ -31,8 +50,8 @@ class MetalCount extends Component {
         </thead>
         <tbody>
           {
-            this.state.medalData.slice(0, 10).map((x, i) => (
-                <tr>
+            this.state.medalData.sort(sorter).slice(0, 10).map((x, i) => (
+                <tr key={i}>
                   <td>{i + 1}</td>
                   <td>FLAG</td>
                   <td>{x.code}</td>
