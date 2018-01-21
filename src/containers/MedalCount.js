@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as mj from '../utils/medals.json';
+import SortButton from '../components/SortButton';
 
 let medalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
@@ -14,7 +15,9 @@ class MetalCount extends Component {
   }
 
   handleClick(event) {
-    
+    this.setState({
+      sort: event.currentTarget.dataset.id
+    })
   }
 
   getResultTable() {
@@ -42,10 +45,10 @@ class MetalCount extends Component {
         <thead>
           <tr>
             <td colSpan="3"></td>
-            <td>gold</td>
-            <td></td>
-            <td></td>
-            <td>total</td>
+            <SortButton order="gold" clickHandler={this.handleClick.bind(this)}/>
+            <SortButton order="silver" clickHandler={this.handleClick.bind(this)}/>
+            <SortButton order="bronze" clickHandler={this.handleClick.bind(this)}/>
+            <SortButton order="total" clickHandler={this.handleClick.bind(this)}/>
           </tr>
         </thead>
         <tbody>
