@@ -1,16 +1,104 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.MedalCount {
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: #777;
+}
+
+.MedalCount-title {
+  font-weight: normal;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.MedalCount-table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.MedalCount-table thead {
+  border-bottom: solid 2px #777;
+  vertical-align: middle;
+}
+
+.col-rank {
+  width: 20px;
+}
+.col-flag {
+  width: 44px;
 }
 
 .SortButton {
+  padding: 6px 4px 4px;
   cursor: pointer;
+  border-top: solid 2px transparent;
+  outline: 0;
+}
+.SortButton:focus,
+.SortButton:hover {
+  border-top-color: #ccc;
+}
+.SortButton:active {
+  transform: translateY(1px);
+} 
+.SortButton:active,
+.SortButton.is-active {
+  border-top-color: #777;
+}
+
+.sort-gold,
+.sort-silver,
+.sort-bronze {
+  width: 28px;
+}
+
+.dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.sort-total {
+  width: 48px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #333;
+}
+
+.CountryRow {
+  border-bottom: solid 1px #ddd;
+}
+
+.CountryRow td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  vertical-align: middle;
 }
 
 .Flag {
   width: 28px;
   height: 17px;
-  background-color: grey;
+  background-color: #777;
   background-image: url('/flags.png');
+}
+
+.MedalCount-error  {
+  text-transform: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.hidden {
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height: 1px;
+  width: 1px; 
+  margin: -1px;
+  padding: 0;
+  border: 0; 
 }

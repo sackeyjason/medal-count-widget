@@ -4,17 +4,30 @@ function Request(options) {
   
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
-      var data = JSON.parse(request.responseText);
-      options.success(data);
+      try {
+        var data = JSON.parse(request.responseText);
+        options.success(data);
+      } catch (error) {
+        // bad JSON
+        options.error({
+          title: "Server error",
+          description: "Unexpected format of data from server."
+        });
+      }
     } else {
-      // We reached our target server, but it returned an error
-      options.error();
+      // Server error
+      options.error({
+        title: request.status + " Error",
+        description: (request.status === 404) ? "Resource not found." : "Access to resource forbidden."
+      });
     }
   };
   
   request.onerror = function() {
-    // There was a connection error of some sort
-    options.error();
+    options.error({
+      title: "Connection error",
+      description: "We couldn't connect to the server. Please try again later, or check your connection."
+    });
   };
   
   request.send();

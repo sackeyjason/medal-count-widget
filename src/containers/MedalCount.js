@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
+import CountryRow from '../components/CountryRow';
 import SortButton from '../components/SortButton';
-import Flag from '../components/Flag';
 import Request from '../utils/Request';
 
-// let medalSource = "/medals.json";
-let medalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
+// let source = "/medals.json";
+let source = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
-class MetalCount extends Component {
+class MedalCount extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hasLoaded: false,
       medalData: {},
-      sort: props.sort
+      sort: props.sort,
+      error: false
     }
   }
 
   componentWillMount() {
     Request({
-      url: medalSource,
+      url: source,
       success: (data) => {
         this.setState({
           hasLoaded: true,
           medalData: data
         });
       },
-      error: function() {}
+      error: data => {
+        this.setState({
+          error: {
+            title: data.title,
+            description: data.description
+          }
+        });
+      }
     });
   }
 
@@ -56,28 +64,41 @@ class MetalCount extends Component {
     };
 
     return (
-      <table style={{width: "100%"}}>
+      <table className="MedalCount-table">
         <thead>
           <tr>
-            <td colSpan="3"></td>
-            <SortButton order="gold" clickHandler={this.handleClick.bind(this)}/>
-            <SortButton order="silver" clickHandler={this.handleClick.bind(this)}/>
-            <SortButton order="bronze" clickHandler={this.handleClick.bind(this)}/>
-            <SortButton order="total" clickHandler={this.handleClick.bind(this)}/>
+            <th className="col-rank"></th>
+            <th className="col-flag"></th>
+            <th className="col-code"></th>
+            <SortButton
+              order="gold"
+              active={this.state.sort === "gold"}
+              clickHandler={this.handleClick.bind(this)}/>
+            <SortButton
+              order="silver"
+              active={this.state.sort === "silver"}
+              clickHandler={this.handleClick.bind(this)}/>
+            <SortButton
+              order="bronze"
+              active={this.state.sort === "bronze"}
+              clickHandler={this.handleClick.bind(this)}/>
+            <SortButton
+              order="total"
+              active={this.state.sort === "total"}
+              clickHandler={this.handleClick.bind(this)}/>
           </tr>
         </thead>
         <tbody>
           {
             this.state.medalData.sort(sorter).slice(0, 10).map((x, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td><Flag code={x.code}/></td>
-                  <td>{x.code}</td>
-                  <td>{x.gold}</td>
-                  <td>{x.silver}</td>
-                  <td>{x.bronze}</td>
-                  <td>{x.gold + x.silver + x.bronze}</td>
-                </tr>
+                <CountryRow
+                  key={i}
+                  rank={i + 1}
+                  code={x.code}
+                  gold={x.gold}
+                  silver={x.silver}
+                  bronze={x.bronze}
+                  total={x.gold + x.silver + x.bronze} />
               )
             )
           }
@@ -87,15 +108,23 @@ class MetalCount extends Component {
   }
   render() {
     let result = this.state.hasLoaded ?
-      this.getResultTable(): 
-      <span>Loading</span>
+      this.getResultTable() :
+      <span className="MedalCount-loading">Loading</span>
+    if (this.state.error) {
+      result = (
+        <div className="MedalCount-error">
+          <h3>{this.state.error.title}</h3>
+          <p>{this.state.error.description}</p>
+        </div>
+      );
+    }
     return (
-      <div className="MetalCount" id={this.props.element_id}>
-        <h2>Medal Count</h2>
+      <div className="MedalCount" id={this.props.element_id}>
+        <h2 className="MedalCount-title">Medal Count</h2>
         {result}
       </div>
     );
   }
 }
 
-export default MetalCount;
+export default MedalCount;

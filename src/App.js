@@ -5,7 +5,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div style={{maxWidth: "600px"}}>
+        <div style={{
+          maxWidth: "400px",
+          margin: "1em auto"}}>
           <MedalCount
             element_id="medals"
             sort="gold"/>

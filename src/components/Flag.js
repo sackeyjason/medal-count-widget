@@ -24,7 +24,9 @@ class Flag extends Component {
 
     return (
       <div
-        style={{backgroundPosition: imagePosition}}
+        style={{
+          display: "inline-block",
+          backgroundPosition: imagePosition}}
         className="Flag">
       </div>
     );
