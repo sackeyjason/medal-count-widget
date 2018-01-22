@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import * as mj from '../utils/medals.json';
 import SortButton from '../components/SortButton';
 import Flag from '../components/Flag';
+import Request from '../utils/Request';
 
+// let medalSource = "/medals.json";
 let medalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
 class MetalCount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasLoaded: true,
-      medalData: mj,
+      hasLoaded: false,
+      medalData: {},
       sort: props.sort
     }
+  }
+
+  componentWillMount() {
+    Request({
+      url: medalSource,
+      success: (data) => {
+        this.setState({
+          hasLoaded: true,
+          medalData: data
+        });
+      },
+      error: function() {}
+    });
   }
 
   handleClick(event) {

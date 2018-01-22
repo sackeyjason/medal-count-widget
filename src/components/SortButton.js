@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class SortButton extends Component {
   handleKeyPress(event) {
-    if(event.key == 'Enter'){
+    if(event.key === 'Enter'){
       this.props.clickHandler(event);
     }
   }

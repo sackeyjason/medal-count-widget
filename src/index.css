@@ -11,5 +11,6 @@ body {
 .Flag {
   width: 28px;
   height: 17px;
+  background-color: grey;
   background-image: url('/flags.png');
 }
