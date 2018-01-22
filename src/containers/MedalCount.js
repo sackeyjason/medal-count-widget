@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as mj from '../utils/medals.json';
 import SortButton from '../components/SortButton';
+import Flag from '../components/Flag';
 
 let medalSource = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
@@ -56,7 +57,7 @@ class MetalCount extends Component {
             this.state.medalData.sort(sorter).slice(0, 10).map((x, i) => (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>FLAG</td>
+                  <td><Flag code={x.code}/></td>
                   <td>{x.code}</td>
                   <td>{x.gold}</td>
                   <td>{x.silver}</td>
