@@ -25,6 +25,7 @@
 .col-rank {
   width: 20px;
 }
+
 .col-flag {
   width: 44px;
 }
@@ -35,13 +36,16 @@
   border-top: solid 2px transparent;
   outline: 0;
 }
+
 .SortButton:focus,
 .SortButton:hover {
   border-top-color: #ccc;
 }
+
 .SortButton:active {
   transform: translateY(1px);
-} 
+}
+
 .SortButton:active,
 .SortButton.is-active {
   border-top-color: #777;
