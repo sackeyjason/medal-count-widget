@@ -78,6 +78,7 @@
 }
 
 .Flag {
+  display: inline-block;
   width: 28px;
   height: 17px;
   background-color: #777;

@@ -18,8 +18,8 @@ function Request(options) {
       // Server error
       options.error({
         title: request.status + " Error",
-        description: (request.status === 404) ? "Resource not found." : "Access to resource forbidden."
-      });
+        description: "We couldn't retrieve the results from the server."
+      }); 
     }
   };
   

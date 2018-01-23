@@ -10,7 +10,7 @@ class App extends Component {
           margin: "1em auto"}}>
           <MedalCount
             element_id="medals"
-            sort="gold"/>
+            sort="gold" />
         </div>
       </div>
     );

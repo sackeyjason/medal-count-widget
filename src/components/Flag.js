@@ -18,15 +18,16 @@ const flagSpriteMap = {
 const flagHeight = 17;
 
 class Flag extends Component {
+  getStyle() {
+    const yCoordinate = -1 * flagHeight * flagSpriteMap[this.props.code];
+    return {
+      backgroundPosition: "0 " + yCoordinate + "px"
+    }
+  }
   render() {
-    let yCoordinate = -1 * flagHeight * flagSpriteMap[this.props.code];
-    let imagePosition = "0 " + yCoordinate + "px";
-
     return (
       <div
-        style={{
-          display: "inline-block",
-          backgroundPosition: imagePosition}}
+        style={this.getStyle()}
         className="Flag">
       </div>
     );

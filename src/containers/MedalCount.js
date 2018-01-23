@@ -3,8 +3,8 @@ import CountryRow from '../components/CountryRow';
 import SortButton from '../components/SortButton';
 import Request from '../utils/Request';
 
-// let source = "/medals.json";
-let source = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
+// const source = "/medals.json";
+const source = "https://s3-us-west-2.amazonaws.com/reuters.medals-widget/medals.json";
 
 class MedalCount extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class MedalCount extends Component {
     this.state = {
       hasLoaded: false,
       medalData: {},
-      sort: props.sort,
+      sort: props.sort || "gold",
       error: false
     }
   }
@@ -77,15 +77,15 @@ class MedalCount extends Component {
             <SortButton
               order="silver"
               active={this.state.sort === "silver"}
-              clickHandler={this.handleClick.bind(this)}/>
+              clickHandler={this.handleClick.bind(this)} />
             <SortButton
               order="bronze"
               active={this.state.sort === "bronze"}
-              clickHandler={this.handleClick.bind(this)}/>
+              clickHandler={this.handleClick.bind(this)} />
             <SortButton
               order="total"
               active={this.state.sort === "total"}
-              clickHandler={this.handleClick.bind(this)}/>
+              clickHandler={this.handleClick.bind(this)} />
           </tr>
         </thead>
         <tbody>
