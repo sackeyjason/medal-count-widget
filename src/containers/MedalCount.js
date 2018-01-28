@@ -119,7 +119,7 @@ class MedalCount extends Component {
       );
     }
     return (
-      <div className="MedalCount" id={this.props.element_id}>
+      <div className="MedalCount">
         <h2 className="MedalCount-title">Medal Count</h2>
         {result}
       </div>

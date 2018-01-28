@@ -9,7 +9,6 @@ class App extends Component {
           maxWidth: "400px",
           margin: "1em auto"}}>
           <MedalCount
-            element_id="medals"
             sort="gold" />
         </div>
       </div>
