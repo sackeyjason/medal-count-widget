@@ -86,7 +86,7 @@
   width: 28px;
   height: 17px;
   background-color: #777;
-  background-image: url('/flags.png');
+  background-image: url('https://s3-us-west-2.amazonaws.com/reuters.medals-widget/flags.png');
 }
 
 .MedalCount-error  {
