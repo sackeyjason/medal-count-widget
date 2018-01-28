@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import MedalCount from './containers/MedalCount';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function MedalCountWidget(element_id, sort) {
+  ReactDOM.render(<MedalCount sort={sort}/>,
+    document.getElementById(element_id));
+}
+window.MedalCountWidget = MedalCountWidget;
